@@ -3,6 +3,7 @@ buildscript {
 		springBootVersion = '1.5.2.RELEASE'
 	}
 	repositories {
+		mavenLocal()
 		mavenCentral()
 	}
 	dependencies {
@@ -18,14 +19,39 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
+	
+	// http client
+	compile('commons-httpclient:commons-httpclient:3.1')    
+    compile('org.apache.httpcomponents:fluent-hc:4.5.3')
+    compile('org.apache.httpcomponents:httpclient:4.5.3')
+    compile('org.apache.httpcomponents:httpclient-cache:4.5.3')
+    compile('org.apache.httpcomponents:httpcore:4.4.6')
+    compile('org.apache.httpcomponents:httpmime:4.5.3')
+    
+    // okhttp
+	compile ('com.squareup.okhttp3:okhttp:3.6.0')
+	compile ('com.squareup.okhttp3:logging-interceptor:3.6.0')
+	
+	//bouncycastle
 	compile 'org.bouncycastle:bcprov-jdk16:1.46'
+	
 	//lombok
 	compile 'org.projectlombok:lombok:1.16.16'
+	//jackson-lombok
+	compile 'com.xebia:jackson-lombok:1.1'
+	
+	// fasterxml jackson
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.4'
+   	compile 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
+   	compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.4'
+   	compile 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.8.4'
+	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
