@@ -48,10 +48,14 @@ dependencies {
 	compile 'com.xebia:jackson-lombok:1.1'
 	
 	// fasterxml jackson
-    compile 'com.fasterxml.jackson.core:jackson-core:2.8.4'
-   	compile 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
-   	compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.4'
-   	compile 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.8.4'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.7'
+   	compile 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
+   	compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.7'
+   	compile 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.8.7'
+   	
+   	//apache common
+   	compile 'commons-lang:commons-lang:2.6'
+	compile 'commons-codec:commons-codec'
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.xebia.jacksonlombok.JacksonLombokAnnotationIntrospector;
 
 /**
  * 
@@ -49,7 +48,8 @@ public  class JSONUtils {
 			}
 		});
 		JSONUtils.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		JSONUtils.objectMapper.setAnnotationIntrospector(new MyJacksonLombokAnnotationIntrospector());
+//		JSONUtils.objectMapper.configure(MapperFeature.INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES, false);
+//		JSONUtils.objectMapper.setAnnotationIntrospector(new MyJacksonLombokAnnotationIntrospector());
 //		objectMapper.setSerializationInclusion(Include.NON_NULL);
 	}
 	
