@@ -27,8 +27,16 @@ import org.slf4j.LoggerFactory;
 import com.encrypt.util.JSONUtils;
 
 /**
- * @author vince
- *
+ * 
+  * @Title: OkHttpUtil.java 
+  * @Package com.encrypt.util.okhttp 
+  * @Description   字符串工具类
+  * @author  XZF
+  * @date 2017年3月31日 上午11:39:24 
+  * @version   
+  *
+  * @Copyrigth  版权所有 (C) 2017 .
+  *
  */
 public class OkHttpUtil {
 	

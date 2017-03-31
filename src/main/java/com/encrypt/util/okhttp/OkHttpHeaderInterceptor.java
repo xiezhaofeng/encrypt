@@ -20,7 +20,7 @@ import okhttp3.Response;
   * @date 2017年3月3日 上午11:39:59 
   * @version   
   *
-  * @Copyrigth  版权所有 (C) 2016 广州讯心信息科技有限公司.
+  * @Copyrigth  版权所有 (C) 2016
   *
  */
 public class OkHttpHeaderInterceptor implements Interceptor{

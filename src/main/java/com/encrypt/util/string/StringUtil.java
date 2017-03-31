@@ -10,137 +10,142 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 
- * @Title StringUtil
- * @Description 字符串工具类
- *
- * @Project ry-coach-data-access-service
- * @Date 2016年11月30日
- * @Author 谢照锋
- * @Copyrigth 版权所有 (C) 2016 广州讯心信息科技有限公司.
- *
- * @注意 本内容仅限于广州讯心内部传阅，禁止外泄以及用于其他的商业目的
+  * @Title: StringUtil.java 
+  * @Package com.encrypt.util.string 
+  * @Description   字符串工具类
+  * @author  XZF
+  * @date 2017年3月31日 上午11:39:08 
+  * @version   
+  *
+  * @Copyrigth  版权所有 (C) 2017.
+  *
  */
-public final class StringUtil {
+public final class StringUtil
+{
+
 	private static final String DEFAULT_DOUBLE_VALUE = "0.00";
+
 	private static final String IS_NUM_PATTERN = "^(-?\\d+)(\\.\\d+)?$";
+
 	private static final String STR = "\r\n";
+
 	private static final String VALIDE_MOBILE_PATTERN = "^[1-9]\\d{10}$";
+
 	private static final String VALIDEP_NUMBER_PATTERN = "^[+-]?\\d+$";
+
 	private static final String NULL_STRING = "";
+
 	private static final String STRING = "-";
 
 	/** Private Constructor **/
-	private StringUtil() {
+	private StringUtil()
+	{
 	}
 
 	/** 数据格式 **/
-	public interface DATA_PATTERN {
+	public interface DATA_PATTERN
+	{
+
 		String X_XX = "#0.00";
 	}
 
 	/**
 	 * 
 	 * @Title equals
-	 * @Description 
+	 * @Description
 	 * @param str1
 	 * @param str2
 	 * @return boolean
 	 * @throws
 	 */
-	public static boolean equals(String str1, String str2) 
+	public static boolean equals(String str1, String str2)
 	{
-		return str1 ==null & str2 == null?true:str1 == null ? false : str2 == null ? false : str1.equals(str2);
+		return str1 == null & str2 == null ? true : str1 == null ? false : str2 == null ? false : str1.equals(str2);
 	}
 
-	public static boolean equalsIgnoreCase(String str1, String str2) 
+	public static boolean equalsIgnoreCase(String str1, String str2)
 	{
-		return str1 ==null & str2 == null ? true : str1 == null ? false : str2 == null ? false : str1.equalsIgnoreCase(str2);
+		return str1 == null & str2 == null ? true : str1 == null ? false : str2 == null ? false : str1.equalsIgnoreCase(str2);
 	}
-	
-	public static boolean notEquals(String str1, String str2) 
+
+	public static boolean notEquals(String str1, String str2)
 	{
 		return !equals(str1, str2);
 	}
 
-	public static boolean notEqualsIgnoreCase(String str1, String str2) 
+	public static boolean notEqualsIgnoreCase(String str1, String str2)
 	{
 		return !equalsIgnoreCase(str1, str2);
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(equals("f", "F","f","f"));
+
+	public static void main(String[] args)
+	{
+		System.out.println(equals("f", "F", "f", "f"));
 	}
+
 	/**
 	 * 
 	 * @Title equals
 	 * @Description 比对数组字符串相等
 	 * @param strs
-	 * @return boolean   
+	 * @return boolean
 	 * @throws
 	 */
-	public static boolean equals(String... strs) 
+	public static boolean equals(String... strs)
 	{
-		if(strs == null){
-			return false;
-		}
-		if(strs.length < 2){
-			throw new RuntimeException("Parameters can not be less than 2");
-		}
-		for(int i =1; i < strs.length; i++ ){
-			if(!equals(strs[i-1],strs[i])){
-				return false;
-			}
+		if (strs == null) { return false; }
+		if (strs.length < 2) { throw new RuntimeException("Parameters can not be less than 2"); }
+		for (int i = 1; i < strs.length; i++)
+		{
+			if (!equals(strs[i - 1], strs[i])) { return false; }
 		}
 		return true;
 	}
+
 	/**
 	 * 
 	 * @Title equalsIgnoreCase
 	 * @Description 比对数组字符串不相等
 	 * @param strs
-	 * @return boolean   
+	 * @return boolean
 	 * @throws
 	 */
-	public static boolean equalsIgnoreCase(String... strs) 
+	public static boolean equalsIgnoreCase(String... strs)
 	{
-		if(strs == null){
-			return false;
-		}
-		if(strs.length < 2){
-			throw new RuntimeException("Parameters can not be less than 2");
-		}
-		for(int i =1; i < strs.length; i++ ){
-			if(!equalsIgnoreCase(strs[i-1],strs[i])){
-				return false;
-			}
+		if (strs == null) { return false; }
+		if (strs.length < 2) { throw new RuntimeException("Parameters can not be less than 2"); }
+		for (int i = 1; i < strs.length; i++)
+		{
+			if (!equalsIgnoreCase(strs[i - 1], strs[i])) { return false; }
 		}
 		return true;
 	}
+
 	/**
 	 * 
 	 * @Title equals
 	 * @Description 比对数组字符串相等
 	 * @param strs
-	 * @return boolean   
+	 * @return boolean
 	 * @throws
 	 */
-	public static boolean notEquals(String... strs) 
+	public static boolean notEquals(String... strs)
 	{
 		return !equals(strs);
 	}
+
 	/**
 	 * 
 	 * @Title equalsIgnoreCase
 	 * @Description 比对数组字符串不相等
 	 * @param strs
-	 * @return boolean   
+	 * @return boolean
 	 * @throws
 	 */
-	public static boolean notEqualsIgnoreCase(String... strs) 
+	public static boolean notEqualsIgnoreCase(String... strs)
 	{
 		return !equalsIgnoreCase(strs);
 	}
-
 
 	/**
 	 * 判断字符串是否非null && 非空字符
@@ -148,7 +153,8 @@ public final class StringUtil {
 	 * @param param
 	 * @return
 	 */
-	public static boolean isNotEmpty(String param) {
+	public static boolean isNotEmpty(String param)
+	{
 		return !isEmpty(param);
 	}
 
@@ -158,11 +164,11 @@ public final class StringUtil {
 	 * @param param
 	 * @return
 	 */
-	public static boolean isNotEmpty(String... params) {
-		for (String param : params) {
-			if (isEmpty(param)) {
-				return false;
-			}
+	public static boolean isNotEmpty(String... params)
+	{
+		for (String param : params)
+		{
+			if (isEmpty(param)) { return false; }
 		}
 		return true;
 	}
@@ -173,11 +179,11 @@ public final class StringUtil {
 	 * @param param
 	 * @return
 	 */
-	public static boolean isNotEmpty(List<String> params) {
-		for (String param : params) {
-			if (isEmpty(param)) {
-				return false;
-			}
+	public static boolean isNotEmpty(List<String> params)
+	{
+		for (String param : params)
+		{
+			if (isEmpty(param)) { return false; }
 		}
 		return true;
 	}
@@ -188,7 +194,8 @@ public final class StringUtil {
 	 * @param param
 	 * @return
 	 */
-	public static boolean isEmpty(String param) {
+	public static boolean isEmpty(String param)
+	{
 		return param == null || param.trim().length() == 0;
 	}
 
@@ -198,11 +205,11 @@ public final class StringUtil {
 	 * @param param
 	 * @return
 	 */
-	public static boolean isEmpty(String... params) {
-		for (String param : params) {
-			if (!isEmpty(param)) {
-				return false;
-			}
+	public static boolean isEmpty(String... params)
+	{
+		for (String param : params)
+		{
+			if (!isEmpty(param)) { return false; }
 		}
 		return true;
 	}
@@ -213,11 +220,11 @@ public final class StringUtil {
 	 * @param param
 	 * @return
 	 */
-	public static boolean isEmpty(List<String> params) {
-		for (String param : params) {
-			if (!isEmpty(param)) {
-				return false;
-			}
+	public static boolean isEmpty(List<String> params)
+	{
+		for (String param : params)
+		{
+			if (!isEmpty(param)) { return false; }
 		}
 		return true;
 	}
@@ -229,9 +236,11 @@ public final class StringUtil {
 	 * @return
 	 * @throws
 	 */
-	public static String toString(List<String> list) {
+	public static String toString(List<String> list)
+	{
 		StringBuilder sbd = new StringBuilder();
-		for (String lineDate : list) {
+		for (String lineDate : list)
+		{
 			sbd.append(lineDate).append(STR);
 		}
 		return sbd.toString();
@@ -243,15 +252,17 @@ public final class StringUtil {
 	 * @param money
 	 * @return
 	 */
-	public static boolean valideMoney(String money) {
-		try {
-			if (null == money || NULL_STRING.equals(money)) {
-				return true;
-			}
+	public static boolean valideMoney(String money)
+	{
+		try
+		{
+			if (null == money || NULL_STRING.equals(money)) { return true; }
 			DecimalFormat df = new DecimalFormat(DATA_PATTERN.X_XX);
 			Number data = df.parse(money);
 			return money.equals(df.format(data));
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			return false;
 		}
 	}
@@ -262,10 +273,9 @@ public final class StringUtil {
 	 * @param numStr
 	 * @return
 	 */
-	public static boolean valideNumberStr(String numStr) {
-		if (null == numStr || NULL_STRING.equals(numStr)) {
-			return true;
-		}
+	public static boolean valideNumberStr(String numStr)
+	{
+		if (null == numStr || NULL_STRING.equals(numStr)) { return true; }
 		return valideStrPattern(numStr, VALIDEP_NUMBER_PATTERN);
 	}
 
@@ -275,7 +285,8 @@ public final class StringUtil {
 	 * @param mobilePhone
 	 * @return
 	 */
-	public static boolean valideMobilePhone(String mobilePhone) {
+	public static boolean valideMobilePhone(String mobilePhone)
+	{
 		return valideStrPattern(mobilePhone, VALIDE_MOBILE_PATTERN);
 	}
 
@@ -286,12 +297,16 @@ public final class StringUtil {
 	 * @param pattern
 	 * @return
 	 */
-	public static boolean valideStrPattern(String str, String pattern) {
-		try {
+	public static boolean valideStrPattern(String str, String pattern)
+	{
+		try
+		{
 			Pattern p = Pattern.compile(pattern);
 			Matcher m = p.matcher(str);
 			return m.matches();
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			return false;
 		}
 	}
@@ -301,7 +316,8 @@ public final class StringUtil {
 	 * 
 	 * @return
 	 */
-	public static String getGUID() {
+	public static String getGUID()
+	{
 		UUID uuid = UUID.randomUUID();
 		return StringUtils.remove(uuid.toString(), STRING);
 	}
@@ -312,13 +328,18 @@ public final class StringUtil {
 	 * @param str
 	 * @return
 	 */
-	public static int toInt(String str) {
+	public static int toInt(String str)
+	{
 		int res = 0;
-		try {
-			if (null != str && (!NULL_STRING.equals(str))) {
+		try
+		{
+			if (null != str && (!NULL_STRING.equals(str)))
+			{
 				res = Integer.parseInt(str);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 		}
 		return res;
 	}
@@ -329,13 +350,18 @@ public final class StringUtil {
 	 * @param str
 	 * @return
 	 */
-	public static double toDouble(String str) {
+	public static double toDouble(String str)
+	{
 		double res = 0.00;
-		try {
-			if (null != str && (!NULL_STRING.equals(str))) {
+		try
+		{
+			if (null != str && (!NULL_STRING.equals(str)))
+			{
 				res = Double.parseDouble(str);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 		}
 		return res;
 	}
@@ -346,12 +372,16 @@ public final class StringUtil {
 	 * @param doub
 	 * @return
 	 */
-	public static String toString(double doub) {
+	public static String toString(double doub)
+	{
 		String res = DEFAULT_DOUBLE_VALUE;
-		try {
+		try
+		{
 			DecimalFormat df = new DecimalFormat(DATA_PATTERN.X_XX);
 			res = df.format(doub);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 		}
 		return res;
 	}
@@ -362,11 +392,13 @@ public final class StringUtil {
 	 * @param str
 	 * @return True为数字
 	 */
-	public static boolean isNum(String str) {
+	public static boolean isNum(String str)
+	{
 		return matchRegex(str, IS_NUM_PATTERN);
 	}
 
-	private static boolean matchRegex(String value, String regex) {
+	private static boolean matchRegex(String value, String regex)
+	{
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(value);
 		return matcher.matches();

@@ -1,9 +1,24 @@
+//def nexusurl = System.getProperty("nexusurl") ?: "${nexusurldefault}"
+////gradle snapshot upload URL
+//def devrepourl="${nexusurl}/repository/maven-snapshots/"
+////gradle release upload URL
+//def relrepourl="${nexusurl}/repository/maven-releases/"
+//gradle download URL
+//def pubrepourl= "${nexusurl}/repository/maven-public/"
+//
+//
+//
+//println "nexus url : ${nexusurl}"
+
 buildscript {
 	ext {
 		springBootVersion = '1.5.2.RELEASE'
+		//nexusurl = System.getProperty("nexusurl") ?: "http://MY_MAVEN_IP:PORT/"
+		//pubrepourl= "${nexusurl}/repository/maven-public/"
 	}
 	repositories {
 		mavenLocal()
+		//maven { url "${pubrepourl}" } 
 		mavenCentral()
 	}
 	dependencies {
@@ -12,17 +27,60 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+group = "com.encrypt"
+def artifactId = "encrypt"
 
 version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+//parameter setter release
+def paramRelease =  project.properties.get("release")
+if("${paramRelease}" != "null"){
+	version = version.replace("-SNAPSHOT","")
+}
+
+//gradle build, setter upload URL
+//def repourl=devrepourl
+// if (!version.contains("SNAPSHOT")){
+// repourl=relrepourl
+// }
+// 
+//springBoot {
+//    mainClass = "com.xunxintech.ruyue.coach.RyCoachDataAccessServiceApplication"
+//}
 
 repositories {
 	mavenLocal()
+	//maven { url pubrepourl } //my maven URL
 	mavenCentral()
 }
-
+//filter exclude jar 
+configurations {
+	providedRuntime
+	all*.exclude module: 'spring-boot-devtools'
+	all*.exclude group: 'javax.persistence', module: 'persistence-api'
+}
+//set jar sources
+artifacts {
+    archives sourcesJar
+}
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
@@ -59,3 +117,62 @@ dependencies {
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+//gradle build profiles param
+def pro =  project.properties.get("springProfiles")
+
+if("${pro}" != "null"){
+    test.systemProperty 'spring.profiles.active', "${pro}"
+	println "spring.profiles.active=${pro}"
+}
+
+task showTestTaskClasspath << {
+  test.classpath.each { println it }
+}
+
+//fatJar filer files
+task fatJar(type: Jar) {
+	baseName = "$artifactId"
+	version = "$project.version"
+	exclude('com/xunxintech/ruyue/coach/RyCoachDataAccessService*')	
+	exclude('com/xunxintech/ruyue/coach/account')
+	exclude('mapper/account')
+	exclude('config')
+	exclude('com/xunxintech/ruyue/coach/utils/PropertiesUtil*')
+	exclude('error*')
+    from {configurations.compile.filter{!it.name.startsWith('ry-coach-common')}.collect { it.isDirectory() ? it : zipTree(it)}}
+    with jar
+}
+
+
+install{
+    repositories{
+    	mavenInstaller {
+	        pom.version = "$project.version"
+	        pom.artifactId = "$artifactId"
+	        pom.groupId = "$project.group"
+	    }
+    
+    
+    }
+
+}
+////upload to nexus
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: repourl)
+//            {
+//                authentication(userName: "$nexususer", password: "$nexuspwd")
+//            }
+//            pom.version = "$project.version"
+//            pom.artifactId = "$artifactId"
+//            pom.groupId = "$project.group"
+//        }
+//    }
+//}
+//fatJar.dependsOn javadocJar
+//setter fatJar
+fatJar.mustRunAfter jar
+install.dependsOn fatJar
+uploadArchives.dependsOn install

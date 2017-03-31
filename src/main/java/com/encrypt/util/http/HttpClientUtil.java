@@ -36,13 +36,13 @@ import org.slf4j.LoggerFactory;
 /**
  * 
   * @Title: HttpClientUtil.java 
-  * @Package com.xunxintech.ruyue.coach.io.network.httpclient 
-  * @Description  
+  * @Package com.encrypt.util.http 
+  * @Description  HTTP client 工具类
   * @author  XZF
-  * @date 2017年3月7日 上午9:42:13 
+  * @date 2017年3月31日 上午11:39:54 
   * @version   
   *
-  * @Copyrigth  版权所有 (C) 2016 广州讯心信息科技有限公司.
+  * @Copyrigth  版权所有 (C) 2017 广州讯心信息科技有限公司.
   *
  */
 public class HttpClientUtil {

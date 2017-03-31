@@ -13,44 +13,61 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 /**
  * 
- * @author RiesenQiao
- * @version 2013-3-6
+  * @Title: JSONUtils.java 
+  * @Package com.encrypt.util 
+  * @Description  JSON UTIL
+  * @author  XZF
+  * @date 2017年3月31日 上午11:37:44 
+  * @version   
+  *
+  * @Copyrigth  版权所有 (C) 2017 .
+  *
  */
-public  class JSONUtils {
+public class JSONUtils
+{
+
 	public static ObjectMapper objectMapper;
-	
-	public static String toJackson(Object object) throws JsonProcessingException{
+
+	public static String toJackson(Object object) throws JsonProcessingException
+	{
 		return objectMapper.writeValueAsString(object);
 	}
-	
+
 	/**
 	 * remove blank
 	 * @param str
 	 * @return
 	 */
-	public static String replaceBlank(String str) {
-        if (str!=null) {
-            Pattern p = Pattern.compile("\r|\n");
-            Matcher m = p.matcher(str);
-          return  m.replaceAll("");
-        }
-        return str;
+	public static String replaceBlank(String str)
+	{
+		if (str != null)
+		{
+			Pattern p = Pattern.compile("\r|\n");
+			Matcher m = p.matcher(str);
+			return m.replaceAll("");
+		}
+		return str;
 	}
-	
-	
-	static{
+
+	static
+	{
 		System.out.println("init objectMapper...");
 		objectMapper = new ObjectMapper();
-		objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>(){
+		objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>()
+		{
+
 			@Override
-			public void serialize(Object arg0, JsonGenerator arg1, SerializerProvider arg2) throws IOException, JsonProcessingException {
-			arg1.writeString("");
+			public void serialize(Object arg0, JsonGenerator arg1, SerializerProvider arg2) throws IOException, JsonProcessingException
+			{
+				arg1.writeString("");
 			}
 		});
 		JSONUtils.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//		JSONUtils.objectMapper.configure(MapperFeature.INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES, false);
-//		JSONUtils.objectMapper.setAnnotationIntrospector(new MyJacksonLombokAnnotationIntrospector());
-//		objectMapper.setSerializationInclusion(Include.NON_NULL);
+		// JSONUtils.objectMapper.configure(MapperFeature.INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES,
+		// false);
+		// JSONUtils.objectMapper.setAnnotationIntrospector(new
+		// MyJacksonLombokAnnotationIntrospector());
+		// objectMapper.setSerializationInclusion(Include.NON_NULL);
 	}
-	
+
 }
