@@ -64,8 +64,13 @@ repositories {
 //filter exclude jar 
 configurations {
 	providedRuntime
-	all*.exclude module: 'spring-boot-devtools'
-	all*.exclude group: 'javax.persistence', module: 'persistence-api'
+	//all*.exclude module: 'spring-boot-devtools'
+	//all*.exclude group: 'javax.persistence', module: 'persistence-api'
+}
+//sources jar
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
 //set jar sources
 artifacts {
@@ -140,7 +145,7 @@ task fatJar(type: Jar) {
 	exclude('config')
 	exclude('com/xunxintech/ruyue/coach/utils/PropertiesUtil*')
 	exclude('error*')
-    from {configurations.compile.filter{!it.name.startsWith('ry-coach-common')}.collect { it.isDirectory() ? it : zipTree(it)}}
+    from {configurations.compile.filter{!it.name.startsWith('lombok')}.collect { it.isDirectory() ? it : zipTree(it)}}
     with jar
 }
 
