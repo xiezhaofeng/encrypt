@@ -80,6 +80,7 @@ sourceSets {
     main {
         java {
             srcDir 'src/main/java'
+            project.configurations.compile
         }
         resources {
             srcDir 'src/main/resources'
@@ -89,6 +90,9 @@ sourceSets {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
+	
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
 	
 	// http client
 	compile('commons-httpclient:commons-httpclient:3.1')    

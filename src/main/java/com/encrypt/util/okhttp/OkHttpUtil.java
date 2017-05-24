@@ -62,6 +62,18 @@ public class OkHttpUtil {
 	 * @param readTimeout void   
 	 * @throws
 	 */
+	public static void initOkHttp(){
+		mOkHttpClient=loadOkHttp(30, 30,30,null, DEFAULT_MAX_REQUESTS, DEFAULT_MAX_REQUESTS_PER_HOST);
+	}
+	
+	/**
+	 * 
+	 * @Title initOkHttp
+	 * @Description inIt okHttp
+	 * @param connectionTimeout.30
+	 * @param readTimeout void   
+	 * @throws
+	 */
 	public static void initOkHttp(long connectionTimeout, long readTimeout){
 		mOkHttpClient=loadOkHttp(connectionTimeout, readTimeout,readTimeout,null, DEFAULT_MAX_REQUESTS, DEFAULT_MAX_REQUESTS_PER_HOST);
 	}
@@ -106,9 +118,9 @@ public class OkHttpUtil {
 	public static OkHttpClient loadOkHttp(long connectionTimeout, long readTimeout,long writeTimeout,Map<String, String> headers, int maxRequests, int maxRequestsPerHost){
 		
 		Builder builder = new OkHttpClient().newBuilder()
-				.connectTimeout(connectionTimeout, TimeUnit.MILLISECONDS)
-				.writeTimeout(writeTimeout, TimeUnit.MILLISECONDS)
-		        .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
+				.connectTimeout(connectionTimeout, TimeUnit.SECONDS)
+				.writeTimeout(writeTimeout, TimeUnit.SECONDS)
+		        .readTimeout(readTimeout, TimeUnit.SECONDS)
 				.retryOnConnectionFailure(true);
 		//debug add logger interceptor
 		if(LOG.isDebugEnabled()){
