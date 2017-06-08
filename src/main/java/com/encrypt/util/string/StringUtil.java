@@ -60,12 +60,12 @@ public final class StringUtil
 	 */
 	public static boolean equals(String str1, String str2)
 	{
-		return str1 == null && str2 == null ? true : str1 == null ? false : str2 == null ? false : str1.equals(str2);
+		return str1 == null ? str2 == null : str1.equals(str2);
 	}
 
 	public static boolean equalsIgnoreCase(String str1, String str2)
 	{
-		return str1 == null && str2 == null ? true : str1 == null ? false : str2 == null ? false : str1.equalsIgnoreCase(str2);
+		return str1 == null ? str2 == null : str1.equalsIgnoreCase(str2);
 	}
 
 	public static boolean notEquals(String str1, String str2)
@@ -174,21 +174,6 @@ public final class StringUtil
 	}
 
 	/**
-	 * 判断字符串是否非null && 非空字符
-	 * 
-	 * @param param
-	 * @return
-	 */
-	public static boolean isNotEmpty(List<String> params)
-	{
-		for (String param : params)
-		{
-			if (isEmpty(param)) { return false; }
-		}
-		return true;
-	}
-
-	/**
 	 * 判断字符串是否为null || 空字符串
 	 * 
 	 * @param param
@@ -206,21 +191,6 @@ public final class StringUtil
 	 * @return
 	 */
 	public static boolean isEmpty(String... params)
-	{
-		for (String param : params)
-		{
-			if (!isEmpty(param)) { return false; }
-		}
-		return true;
-	}
-
-	/**
-	 * 判断字符串是否为null || 空字符串
-	 * 
-	 * @param param
-	 * @return
-	 */
-	public static boolean isEmpty(List<String> params)
 	{
 		for (String param : params)
 		{
