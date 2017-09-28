@@ -165,10 +165,9 @@ public class SymmetricEncoder
 		 * 解密
 		 */
 		System.out.println("########################################");
-		String decodeRules = new String("code rules");
-		String deContent = "BTZ/wSTfQSRrNid4MTsoww==";
+		String deContent = "fLBT/zea4poX72fBSCazUg==";
 		content = "my name is test";
-		System.out.println("根据输入的规则" + encodeRules + "解密后的明文是:" + AESDncode(decodeRules, deContent));
+		System.out.println("根据输入的规则" + encodeRules + "解密后的明文是:" + AESDncode(encodeRules, deContent));
 	}
 
 }

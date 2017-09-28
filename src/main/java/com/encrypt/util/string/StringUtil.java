@@ -78,11 +78,6 @@ public final class StringUtil
 		return !equalsIgnoreCase(str1, str2);
 	}
 
-	public static void main(String[] args)
-	{
-		System.out.println(equals("f", "F", "f", "f"));
-	}
-
 	/**
 	 * 
 	 * @Title equals

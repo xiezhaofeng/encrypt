@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import com.encrypt.util.JSONUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Data
@@ -16,8 +15,8 @@ public class User {
 	private Integer age;
 	private String ignore;
 	
-	public static void main(String[] args) throws JsonProcessingException {
-		User user = new User("1234", 1, "dsfa");
-		System.out.println(JSONUtils.toJackson(user));
+	public  void main(String[] args) throws JsonProcessingException {
+//		User user = new User("1234", 1, "dsfa");
+//		System.out.println(JSONUtils.toJackson(user));
 	}
 }

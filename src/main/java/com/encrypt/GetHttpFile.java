@@ -23,7 +23,7 @@ import com.encrypt.util.string.StringUtil;
 
 public class GetHttpFile
 {
-	public static void main(String[] args) throws ClientProtocolException, IOException
+	public void main(String[] args) throws ClientProtocolException, IOException
 	{
 		String baseUrl = "http://download.eclipse.org";
 		String uri = "http://download.eclipse.org/buildship/updates/e46/releases/1.0/1.0.21.v20161010-1640/plugins/?d";

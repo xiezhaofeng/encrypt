@@ -73,7 +73,7 @@ public class RSAEncrypt
 		{
 			e.printStackTrace();
 		}
-		keyPairGen.initialize(1024, new SecureRandom());
+		keyPairGen.initialize(1024, new SecureRandom("1111111111111".getBytes()));
 		KeyPair keyPair = keyPairGen.generateKeyPair();
 		return new Keys(getKeyString(keyPair.getPublic()), getKeyString(keyPair.getPrivate()));
 	}
@@ -342,6 +342,8 @@ public class RSAEncrypt
 
 		// 测试字符串
 		String encryptStr = "Test String chaijun";
+		
+		System.out.println(keys.getPrivateKey());
 
 		try
 		{
